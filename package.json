@@ -6,7 +6,7 @@
   "scripts": {
     "style": "npx stylelint **/*.{css,scss} --fix",
     "lint": "npx eslint . --fix",
-    "dev": "webpack --mode development",
+    "dev": "webpack server --mode development --open",
     "build": "webpack --mode production",
     "start": "webpack server --mode development --open"
   },

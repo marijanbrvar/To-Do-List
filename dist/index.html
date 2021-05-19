@@ -3,17 +3,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/@primer/css@^16.0.0/dist/primer.css">
   <title>Webpack Default</title>
-  <style>
-    body{ font-size: 1.5em; }
-    .container{ margin: 40px; margin-top: 160px; }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <!-- tooltip -->
-    <p>Lorem dolor sit amet consectetur adipisicing elit. Voluptate sequi odit totam. Quod maiores saepe sequi. <span class="tooltip" data-message="I'm a tooltip and webpack is working!!">Illum aspernatur</span> aut voluptatum</p>
+<div class="container">
+  <div class="Header mb-2">
+    <div class="Header-item">
+      <a href="#" class="Header-link">About</a>
+    </div>
   </div>
+  <div class="d-flex p-4">  
+    <div class="col-4 mr-4">
+      <p class="h2">Category</p>
+      <ul class="filter-list">
+        <li>
+          <a class="filter-item" href="#url" aria-current="page">
+            First filter
+            <span class="count">21</span>
+          </a>
+        </li>
+        <li>
+          <a class="filter-item" href="#url">
+            Second filter
+            <span class="count">3</span>
+          </a>
+        </li>
+        <li>
+          <a class="filter-item" href="#url">
+            Third filter
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-8">
+      <p class="h2">Tasks</p>
+      <button class="btn btn-primary" type="button">Primary</button>
+      <div class="blankslate">
+        <h3 class="mb-1">This is a blank slate</h3>
+        <p>Use it to provide information when no dynamic content exists.</p>
+      </div>
+    </div>
+  </div>
+</div>
   <script src="assets/bundle.js"></script>
 </body>
 </html>
