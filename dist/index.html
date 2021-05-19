@@ -3,49 +3,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://unpkg.com/@primer/css@^16.0.0/dist/primer.css">
-  <title>Webpack Default</title>
+  <title>To Do List</title>
 </head>
 <body>
-<div class="container">
-  <div class="Header mb-2">
-    <div class="Header-item">
-      <a href="#" class="Header-link">About</a>
+  <div class="container">
+    <h1 class="title">Job list</h1>
+    <div id="my-list">
+      <h2>My Lists</h2>
+      <button>Add List</button>
+      <ul>
+        <li>
+          <div>
+            <div>Icon</div>
+            <div>List title</div>
+            <div>Count tasks</div>
+          </div>
+        </li>
+      </ul>
+      <form action="">
+        <div class="form-wrapper">
+          <div class="form-item">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
+          </div>
+        </div>
+        <button>Save new list</button>
+      </form>
     </div>
-  </div>
-  <div class="d-flex p-4">  
-    <div class="col-4 mr-4">
-      <p class="h2">Category</p>
-      <ul class="filter-list">
+    <form action="">
+      <div class="form-wrapper">
+        <div class="form-item">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title">
+        </div>
+        <div class="form-item">
+          <label for="description">Description</label>
+          <input type="text" name="description" id="description">
+        </div>
+        <div class="form-item">
+          <label for="duedate">Due date</label>
+          <input type="text" name="duedate" id="duedate">
+        </div>
+        <div class="form-item">
+          <label class="container">High
+            <input type="radio" checked="checked" name="radio">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Medium
+            <input type="radio" name="radio">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Low
+            <input type="radio" name="radio">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div><button>Save</button></div>
+      </div>
+    </form>
+    <div class="list">
+      <ul>
         <li>
-          <a class="filter-item" href="#url" aria-current="page">
-            First filter
-            <span class="count">21</span>
-          </a>
-        </li>
-        <li>
-          <a class="filter-item" href="#url">
-            Second filter
-            <span class="count">3</span>
-          </a>
-        </li>
-        <li>
-          <a class="filter-item" href="#url">
-            Third filter
-          </a>
+          <div>
+            <div>
+              <div>icon</div>
+            <div>title</div>
+            <div>description</div>
+            </div>
+            <div>
+              duedate
+            </div>
+          </div>
         </li>
       </ul>
     </div>
-    <div class="col-8">
-      <p class="h2">Tasks</p>
-      <button class="btn btn-primary" type="button">Primary</button>
-      <div class="blankslate">
-        <h3 class="mb-1">This is a blank slate</h3>
-        <p>Use it to provide information when no dynamic content exists.</p>
-      </div>
-    </div>
   </div>
-</div>
   <script src="assets/bundle.js"></script>
 </body>
 </html>
