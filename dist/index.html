@@ -7,75 +7,48 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="title">Job list</h1>
-    <div id="my-list">
-      <h2>My Lists</h2>
-      <button>Add List</button>
-      <ul>
-        <li>
-          <div>
-            <div>Icon</div>
-            <div>List title</div>
-            <div>Count tasks</div>
-          </div>
-        </li>
+    <h1 class="title">Jobs need to be done!</h1>
+    <div class="my-lists">
+      <h2 class="my-list--title">My List</h2>
+      <ul class="job-list">
+        <li class="job-list-item">JavaScript</li>
+        <li class="job-list-item">Ruby on Rails</li>
+        <li class="job-list-item">Proffesional skills</li>
       </ul>
-      <form action="">
-        <div class="form-wrapper">
-          <div class="form-item">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title">
-          </div>
-        </div>
-        <button>Save new list</button>
+      <form action="" >
+        <input type="text" class="new list" placeholder="New list name" aria-label="New list name">
+        <button class="btn list" aria-label="Add new list">+</button>
       </form>
     </div>
-    <form action="">
-      <div class="form-wrapper">
-        <div class="form-item">
-          <label for="title">Title</label>
-          <input type="text" name="title" id="title">
-        </div>
-        <div class="form-item">
-          <label for="description">Description</label>
-          <input type="text" name="description" id="description">
-        </div>
-        <div class="form-item">
-          <label for="duedate">Due date</label>
-          <input type="text" name="duedate" id="duedate">
-        </div>
-        <div class="form-item">
-          <label class="container">High
-            <input type="radio" checked="checked" name="radio">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container">Medium
-            <input type="radio" name="radio">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container">Low
-            <input type="radio" name="radio">
-            <span class="checkmark"></span>
-          </label>
-        </div>
-        <div><button>Save</button></div>
+
+    <div class="todo-list">
+      <div class="todo-list-header">
+        <h2>Java Script</h2>
+        <p>Jobs count</p>
       </div>
-    </form>
-    <div class="list">
-      <ul>
-        <li>
-          <div>
-            <div>
-              <div>icon</div>
-            <div>title</div>
-            <div>description</div>
-            </div>
-            <div>
-              duedate
-            </div>
+      <div class="todo-list-body">
+        <div class="jobs">
+          <div class="job">
+            <input type="checkbox" id="job-1">
+            <h2 class="job-title">Job title</h2>
+            <p class="job-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum, omnis?</p>
+            <p class="job-due">Due date in 5 days</p>
           </div>
-        </li>
-      </ul>
+        </div>
+        <div class="todo-list-actions">
+          <button>Remove completed tasks</button>
+          <button>Delete list</button>
+        </div>
+      </div>
+      <form action="" >
+        <input type="text" class="new job" placeholder="New Job Title" aria-label="New Job Title">
+        <input type="text" class="new description" placeholder="Description" aria-label="Description">
+        <input type="date" class="new date" placeholder="Due Date" aria-label="Due Date">
+        <input type="radio" name="weigth" id="wigth">
+        <input type="radio" name="weigth" id="wigth">
+        <input type="radio" name="weigth" id="wigth">
+        <button class="btn job" aria-label="Add new job">+</button>
+      </form>
     </div>
   </div>
   <script src="assets/bundle.js"></script>
