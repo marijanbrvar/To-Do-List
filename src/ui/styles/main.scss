@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*,
+*::before,
+*::after {
+  font-family: inherit;
+  box-sizing: border-box
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.container {
+  padding: 0 1rem;
+  display: grid;
+  gap: 1em;
+  grid:
+  "header header header header" auto
+  "...... list   active ......" auto /
+  1fr minmax(100px, 300px) minmax(250px, 600px) 1fr
+}
+
+.title {
+  grid-area: header;
+  font-size: 2rem;
+  letter-spacing: -1px;
+  color: #00000022;
+  margin: 0;
+  font-weight: 700;
+}
+
+.my-lists {
+  grid-area: list;
+  h2 {
+    font-size: 1rem;
+    margin: 0;
+  }
+  .job-list {
+    margin-top: 1em;
+    list-style: none;
+    padding: 0;
+    line-height: 1.8em;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.57);
+  }
+  .job-list .active {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+.jobs-list {
+  grid-area: active;
+  .jobs-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h2, p {
+    margin: 0;
+  }
+  .job {
+    border: 1px solid rgba(0, 0, 0, 0.27);
+    border-radius: .5em;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    margin: 1em 0;
+    .job-title {
+      font-size: 1.2rem;
+      padding: 0 1em;
+    }
+    .job-desc {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.67);
+      padding: 0 1.5em;
+    }
+    .job-due {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.87);
+      padding: 0 1.2em;
+    }
+    .weigth {
+      text-align: center;
+      flex-grow: 1;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.87);
+      > p:first-child {
+        font-size: .7rem;
+        text-transform: uppercase;
+      }
+      > p:last-child {
+        color: red;
+      }
+    }
+    .check {
+      margin: 0.5em;
+      text-align: center;
+      .checkbox {
+        display: block;
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 25px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+      }
+      .checkbox:hover input ~ .checkmark {
+        background-color: #ccc;
+      }
+      .checkbox input:checked ~ .checkmark {
+        background-color: #3e5fe1;
+      }
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      .checkbox input:checked ~ .checkmark:after {
+        display: block;
+      }
+      .checkbox .checkmark:after {
+        left: 8px;
+        top: 2px;
+        width: 9px;
+        height: 16px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .btn-group button {
+    background-color: #3e5fe1;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    float: left;
+  }
+  button.high {
+    border-radius: 0.5em 0 0 0.5em;
+  }
+  button.low {
+    border-radius: 0 0.5em 0.5em 0;
+  }
+  
+  .btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .btn-group button.active {
+    background: red!important;
+  }
+
+  .btn-group button:hover {
+    background-color: #3e518e;
+  }
+}
+
+.new {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  font-size: inherit;
+  outline: none;
+
+  transition: border-bottom 150ms ease-in;
+}
+
+.new:focus {
+  border-bottom-width: 2px;
+  border-color: #3e5fe1;
+}
+
+.new:focus::placeholder {
+  opacity: 0.2;
+}
+
+.new.list, .new.task {
+  font-size: 1rem;
+}
+
+.new.task {
+  margin: 1em 0;
+}
+
+.btn {
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  padding: 0;
+  color: #3e5fe1aa;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.btn:hover {
+  color: #3e5fe1;
+}
+
+.btn.link {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-job {
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-size: 0.8rem;
+    margin-bottom: 0.4em;
+  }
+}
