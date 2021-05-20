@@ -1,2 +1,9 @@
-import './ui/styles/reset.css';
-import './ui/styles/main.css';
+import './ui/styles/main.scss';
+import View from './ui/view';
+
+function render() {
+  const view = new View();
+  return view;
+}
+
+render();
