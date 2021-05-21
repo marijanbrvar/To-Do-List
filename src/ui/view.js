@@ -3,6 +3,26 @@ const lists = [
   { id: 1, name: 'Java Script' },
   { id: 2, name: 'Ruby on Rails' },
 ];
+
+const jobs = [
+  {
+    id: 1,
+    title: 'Job title',
+    description: 'Lorem ipsum, dolor sit amet ',
+    due: 5,
+    completed: false,
+    weigth: 'medium',
+  },
+  {
+    id: 2,
+    title: 'Job title 2',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum, omnis?',
+    due: 3,
+    completed: false,
+    weigth: 'heigh',
+  },
+];
+
 export default class View {
   constructor() {
     this.app = this.getElement('.container');
