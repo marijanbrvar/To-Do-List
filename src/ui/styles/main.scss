@@ -71,6 +71,9 @@ body {
     display: flex;
     align-items: center;
     margin: 1em 0;
+    div:nth-child(2) {
+      flex-grow: 1;
+    }
     .job-title {
       font-size: 1.2rem;
       padding: 0 1em;
@@ -88,8 +91,7 @@ body {
       padding: 0 1.2em;
     }
     .weigth {
-      text-align: center;
-      flex-grow: 1;
+      text-align: right;
       font-weight: 500;
       color: rgba(0, 0, 0, 0.87);
       > p:first-child {
