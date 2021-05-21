@@ -32,10 +32,10 @@ export default class View {
 
     this.myList = this.createElement('div', 'my-lists');
     this.myListTitle = this.createElement('h2', '', 'My Lists');
-    this.jobList = this.createElement('ul', 'job-list');
+    this.myJobList = this.createElement('ul', 'job-list');
     lists.forEach((item) => {
       this.jobListItem = this.createElement('li', 'job-list-item', item.name);
-      this.jobList.appendChild(this.jobListItem);
+      this.myJobList.appendChild(this.jobListItem);
     });
 
     this.jobListForm = this.createElement('form');
@@ -87,7 +87,7 @@ export default class View {
     this.jobListHeader.append(this.jobListTitle, this.jobListCount);
     this.jobListBody.append(this.jobListJobs);
     this.jobListForm.append(this.input, this.newListBtn);
-    this.myList.append(this.myListTitle, this.jobList, this.jobListForm);
+    this.myList.append(this.myListTitle, this.myJobList, this.jobListForm);
     this.app.append(this.title, this.myList, this.jobList);
   }
 
