@@ -10,14 +10,12 @@ export default class View {
     this.myList = this.createElement('div', 'my-lists');
     this.myListTitle = this.createElement('h2', '', 'My Lists');
     this.myJobList = this.createElement('ul', 'job-list');
-    lists.forEach((item) => {
-      this.jobListItem = this.createElement('li', 'job-list-item', item.name);
-      this.myJobList.appendChild(this.jobListItem);
-    });
 
     this.jobListForm = this.createElement('form');
+    this.jobListForm.setAttribute('data-new-list-form', '');
     this.input = this.createElement('input', 'new');
     this.input.classList.add('list');
+    this.input.setAttribute('data-new-list-input', '');
     this.input.type = 'text';
     this.input.placeholder = 'New List Name';
     this.input.name = 'listName';
@@ -33,6 +31,30 @@ export default class View {
 
     this.jobListBody = this.createElement('div', 'jobs-list-body');
     this.jobListJobs = this.createElement('div', 'jobs');
+
+    this.jobList.append(this.jobListHeader, this.jobListBody);
+    this.jobListHeader.append(this.jobListTitle, this.jobListCount);
+    this.jobListBody.append(this.jobListJobs);
+    this.jobListForm.append(this.input, this.newListBtn);
+    this.myList.append(this.myListTitle, this.myJobList, this.jobListForm);
+    this.app.append(this.title, this.myList, this.jobList);
+  }
+
+  createElement(tag, className, innerText) {
+    const element = document.createElement(tag);
+    if (className) element.classList.add(className);
+    if (innerText) element.innerText = innerText;
+
+    return element;
+  }
+
+  getElement(selector) {
+    const element = document.querySelector(selector);
+
+    return element;
+  }
+
+  displayJobs(jobs) {
     jobs.forEach((item) => {
       this.job = this.createElement('div', 'job');
 
@@ -59,26 +81,13 @@ export default class View {
       this.job.append(this.checkContainer, this.jobContent, this.weigth);
       this.jobListJobs.appendChild(this.job);
     });
-
-    this.jobList.append(this.jobListHeader, this.jobListBody);
-    this.jobListHeader.append(this.jobListTitle, this.jobListCount);
-    this.jobListBody.append(this.jobListJobs);
-    this.jobListForm.append(this.input, this.newListBtn);
-    this.myList.append(this.myListTitle, this.myJobList, this.jobListForm);
-    this.app.append(this.title, this.myList, this.jobList);
   }
 
-  createElement(tag, className, innerText) {
-    const element = document.createElement(tag);
-    if (className) element.classList.add(className);
-    if (innerText) element.innerText = innerText;
-
-    return element;
-  }
-
-  getElement(selector) {
-    const element = document.querySelector(selector);
-
-    return element;
+  displayLists(lists) {
+    lists.forEach((item) => {
+      this.jobListItem = this.createElement('li', 'job-list-item', item.name);
+      this.jobListItem.dataset.listId = item.id;
+      this.myJobList.appendChild(this.jobListItem);
+    });
   }
 }
