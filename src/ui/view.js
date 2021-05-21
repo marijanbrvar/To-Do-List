@@ -49,9 +49,46 @@ export default class View {
     this.newListBtn.classList.add('link');
     this.newListBtn.innerText = 'Add';
 
+    this.jobList = this.createElement('div', 'jobs-list');
+    this.jobListHeader = this.createElement('div', 'jobs-list-header');
+    this.jobListTitle = this.createElement('h2', '', 'Java Script');
+    this.jobListCount = this.createElement('p', '', 'Jobs count');
+
+    this.jobListBody = this.createElement('div', 'jobs-list-body');
+    this.jobListJobs = this.createElement('div', 'jobs');
+    jobs.forEach((item) => {
+      this.job = this.createElement('div', 'job');
+
+      this.checkContainer = this.createElement('div', 'check');
+      this.check = this.createElement('label', 'checkbox');
+      this.checkInput = this.createElement('input');
+      this.checkInput.type = 'checkbox';
+      this.checkInput.setAttribute('checked', item.completed);
+      this.checkmark = this.createElement('span', 'checkmark');
+
+      this.jobContent = this.createElement('div');
+      this.jobTitle = this.createElement('h2', 'job-title', item.title);
+      this.jobDesc = this.createElement('p', 'job-desc', item.description);
+      this.jobDue = this.createElement('p', 'job-due', `In ${item.due} days`);
+      this.jobContent.append(this.jobTitle, this.jobDesc, this.jobDue);
+
+      this.weigth = this.createElement('div', 'weigth');
+      this.priorityLabel = this.createElement('p', '', 'Priority:');
+      this.priorityStatus = this.createElement('p', '', item.weigth);
+      this.weigth.append(this.priorityLabel, this.priorityStatus);
+
+      this.check.append(this.checkInput, this.checkmark);
+      this.checkContainer.append(this.check);
+      this.job.append(this.checkContainer, this.jobContent, this.weigth);
+      this.jobListJobs.appendChild(this.job);
+    });
+
+    this.jobList.append(this.jobListHeader, this.jobListBody);
+    this.jobListHeader.append(this.jobListTitle, this.jobListCount);
+    this.jobListBody.append(this.jobListJobs);
     this.jobListForm.append(this.input, this.newListBtn);
     this.myList.append(this.myListTitle, this.jobList, this.jobListForm);
-    this.app.append(this.title, this.myList);
+    this.app.append(this.title, this.myList, this.jobList);
   }
 
   createElement(tag, className, innerText) {
