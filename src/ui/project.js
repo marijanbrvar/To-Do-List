@@ -1,8 +1,12 @@
 /* eslint-disable class-methods-use-this */
-const projects = [
-  { id: 1, text: 'JavaScript' },
-  { id: 2, text: 'Ruby on rails' },
+const LOCAL_STORAGE_KEYS = 'projects.lists';
+const LOCAL_STORAGE_SELECTED_ID_KEYS = 'projects.selectedProjectId';
+const projects = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS)) || [
+  { id: new Date().getTime().toString(), text: 'My tasks', tasks: [] },
 ];
+
+let selectedProjectId = localStorage.getItem(LOCAL_STORAGE_SELECTED_ID_KEYS);
+
 class Project {
   constructor() {
     this.container = document.querySelector('.container');
