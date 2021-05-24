@@ -26,9 +26,11 @@ class Project {
       projectListItem.id = item.id;
       projectListItem.classList.add('project-item');
       list.appendChild(projectListItem);
+
       if (projectListItem.id === selectedProjectId) {
         projectListItem.classList.add('active-project');
       }
+
       this.projectForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const projectName = this.projectForm.projName.value.trim();
@@ -74,13 +76,14 @@ class Project {
     this.projectForm.append(this.newProjButton);
     this.project.append(this.projectForm);
     this.container.append(this.project);
+
     this.project.addEventListener('click', (e) => {
       if (e.target.tagName.toLowerCase() === 'li') {
         selectedProjectId = e.target.id;
-        console.log(selectedProjectId);
         this.saveAndRender();
       }
     });
+
     this.renderList();
   }
 }
