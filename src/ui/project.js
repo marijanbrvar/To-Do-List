@@ -26,20 +26,33 @@ class Project {
       projectListItem.id = item.id;
       projectListItem.classList.add('project-item');
       list.appendChild(projectListItem);
+      if (projectListItem.id === selectedProjectId) {
+        projectListItem.classList.add('active-project');
+      }
       this.projectForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const projectName = this.projectForm.projName.value.trim();
         if (projectName == null || projectName === '') return;
         const name = this.createProjList(projectName);
-        this.projectForm.reset();
         projects.push(name);
-        this.renderList();
+        this.saveAndRender();
+        this.projectForm.reset();
       });
     });
   }
 
+  saveAndRender() {
+    this.save();
+    this.renderList();
+  }
+
+  save() {
+    localStorage.setItem(LOCAL_STORAGE_KEYS, JSON.stringify(projects));
+    localStorage.setItem(LOCAL_STORAGE_SELECTED_ID_KEYS, selectedProjectId);
+  }
+
   createProjList(name) {
-    return { id: new Date().toString(), text: name, tasks: [] };
+    return { id: new Date().getTime().toString(), text: name, tasks: [] };
   }
 
   clearElement(element) {
