@@ -15,6 +15,7 @@ class Project {
     this.projectForm = document.createElement('form');
     this.projectFormInput = document.createElement('input');
     this.newProjButton = document.createElement('button');
+    this.deleteProjButton = document.createElement('button');
   }
 
   renderList() {
@@ -73,7 +74,9 @@ class Project {
     this.projectFormInput.placeholder = 'New project name';
     this.newProjButton.innerText = 'Add';
     this.newProjButton.classList.add('btn');
-    this.projectForm.append(this.newProjButton);
+    this.deleteProjButton.innerText = 'Remove active list';
+    this.deleteProjButton.classList.add('btn');
+    this.projectForm.append(this.newProjButton, this.deleteProjButton);
     this.project.append(this.projectForm);
     this.container.append(this.project);
 
