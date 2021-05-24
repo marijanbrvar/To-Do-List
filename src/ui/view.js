@@ -55,39 +55,70 @@ export default class View {
   }
 
   displayJobs(jobs) {
-    jobs.forEach((item) => {
-      this.job = this.createElement('div', 'job');
+    if (jobs.length === 0) {
+      const jobs = document.querySelector('.jobs');
+      const p = this.createElement('p');
+      p.textContent = 'Nothing to do! Add a new Job?';
+      jobs.append(p);
+    } else {
+      jobs.forEach((item) => {
+        this.job = this.createElement('div', 'job');
 
-      this.checkContainer = this.createElement('div', 'check');
-      this.check = this.createElement('label', 'checkbox');
-      this.checkInput = this.createElement('input');
-      this.checkInput.type = 'checkbox';
-      this.checkInput.setAttribute('checked', item.completed);
-      this.checkmark = this.createElement('span', 'checkmark');
+        this.checkContainer = this.createElement('div', 'check');
+        this.check = this.createElement('label', 'checkbox');
+        this.checkInput = this.createElement('input');
+        this.checkInput.type = 'checkbox';
+        if (item.completed) {
+          this.checkInput.setAttribute('checked', '');
+        }
+        this.checkmark = this.createElement('span', 'checkmark');
 
-      this.jobContent = this.createElement('div');
-      this.jobTitle = this.createElement('h2', 'job-title', item.title);
-      this.jobDesc = this.createElement('p', 'job-desc', item.description);
-      this.jobDue = this.createElement('p', 'job-due', `In ${item.due} days`);
-      this.jobContent.append(this.jobTitle, this.jobDesc, this.jobDue);
+        this.jobContent = this.createElement('div');
+        this.jobTitle = this.createElement('h2', 'job-title', item.title);
+        this.jobDesc = this.createElement('p', 'job-desc', item.description);
+        this.jobDue = this.createElement('p', 'job-due', `In ${item.due} days`);
+        this.jobContent.append(this.jobTitle, this.jobDesc, this.jobDue);
 
-      this.weigth = this.createElement('div', 'weigth');
-      this.priorityLabel = this.createElement('p', '', 'Priority:');
-      this.priorityStatus = this.createElement('p', '', item.weigth);
-      this.weigth.append(this.priorityLabel, this.priorityStatus);
+        this.weigth = this.createElement('div', 'weigth');
+        this.priorityLabel = this.createElement('p', '', 'Priority:');
+        this.priorityStatus = this.createElement('p', '', item.weigth);
+        this.weigth.append(this.priorityLabel, this.priorityStatus);
 
-      this.check.append(this.checkInput, this.checkmark);
-      this.checkContainer.append(this.check);
-      this.job.append(this.checkContainer, this.jobContent, this.weigth);
-      this.jobListJobs.appendChild(this.job);
-    });
+        this.check.append(this.checkInput, this.checkmark);
+        this.checkContainer.append(this.check);
+        this.job.append(this.checkContainer, this.jobContent, this.weigth);
+        this.jobListJobs.appendChild(this.job);
+      });
+    }
   }
 
   displayLists(lists) {
+    console.log(lists)
     lists.forEach((item) => {
-      this.jobListItem = this.createElement('li', 'job-list-item', item.name);
+      console.log(item)
+      this.jobListItem = this.createElement('li', 'job-list-item', item.text);
       this.jobListItem.dataset.listId = item.id;
       this.myJobList.appendChild(this.jobListItem);
+      console.log(this.myJobList)
+    });
+  }
+
+  get listText() {
+    return this.input.value;
+  }
+
+  resetInput() {
+    this.input.value = '';
+  }
+
+  bindList(handler) {
+    this.jobListForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (this.listText) {
+        handler(this.listText);
+        this.resetInput();
+      }
     });
   }
 }

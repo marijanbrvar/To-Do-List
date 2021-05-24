@@ -11,7 +11,7 @@ class Model {
         id: 1,
         title: 'Make something',
         description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum, omnis?',
-        completed: false,
+        completed: true,
         due: '2021-7-13',
         weigth: 'High',
       },
@@ -44,14 +44,25 @@ class Model {
     localStorage.setItem('jobs', JSON.stringify(jobs));
   }
 
-  addToDo(todoContent) {
+  addList(listText) {
+    const list = {
+      id: this.lists.length > 0 ? this.lists[this.lists.length - 1].id + 1 : 1,
+      text: listText,
+    };
+
+    this.lists.push([list]);
+
+    this.commitLists(list);
+  }
+
+  addJob(job) {
     const todo = {
       id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-      title: todoContent.title,
-      description: todoContent.description,
-      notes: todoContent.notes,
-      due: todoContent.due,
-      weitgh: todoContent.weigth,
+      title: job.title,
+      description: job.description,
+      notes: job.notes,
+      due: job.due,
+      weitgh: job.weigth,
       done: false,
     };
 

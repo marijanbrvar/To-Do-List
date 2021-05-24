@@ -5,6 +5,7 @@ export default class Controller {
 
     this.model.bindJobsChanged(this.bindJobsChanged);
     this.model.bindListsChanged(this.bindListsChanged);
+    this.view.bindList(this.handleList);
 
     this.bindJobsChanged(this.model.jobs);
     this.bindListsChanged(this.model.lists);
@@ -16,5 +17,9 @@ export default class Controller {
 
   bindListsChanged = (lists) => {
     this.view.displayLists(lists);
+  }
+
+  handleList = (listText) => {
+    this.model.addList(listText);
   }
 }
