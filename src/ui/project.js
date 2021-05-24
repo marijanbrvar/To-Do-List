@@ -74,6 +74,13 @@ class Project {
     this.projectForm.append(this.newProjButton);
     this.project.append(this.projectForm);
     this.container.append(this.project);
+    this.project.addEventListener('click', (e) => {
+      if (e.target.tagName.toLowerCase() === 'li') {
+        selectedProjectId = e.target.id;
+        console.log(selectedProjectId);
+        this.saveAndRender();
+      }
+    });
     this.renderList();
   }
 }
