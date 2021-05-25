@@ -51,7 +51,6 @@ class ListView {
   }
 
   renderList(projList) {
-    console.log(projList);
     while (this.list.firstChild) {
       this.list.removeChild(this.list.firstChild);
     }
