@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
 import './styles/app.scss';
 
@@ -50,61 +51,49 @@ class ListView {
   }
 
   renderList(projList) {
-    // while (this.todo.firstChild) {
-    //   this.todo.removeChild(this.todos.firstChild);
-    // }
+    console.log(projList);
+    while (this.list.firstChild) {
+      this.list.removeChild(this.list.firstChild);
+    }
 
     if (projList.length === 0) {
       const p = this.createElement('p');
-      p.textContent = 'Nothing to do! Add a task?';
-      this.todos.append(p);
+      p.textContent = 'Lists empty! Add some?';
+      this.lists.append(p);
     } else {
-      projList.forEach((todo) => {
-        const li = this.createElement('li', 'todo-item');
-        li.id = todo.id;
-
-        const checkbox = this.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = todo.complete;
+      projList.forEach((list) => {
+        const li = this.createElement('li', 'list-item');
+        li.id = list.id;
 
         const span = this.createElement('span');
         span.contentEditable = true;
         span.classList.add('editable');
-
-        if (todo.complete) {
-          const strike = this.createElement('s');
-          strike.textContent = todo.text;
-          span.append(strike);
-        } else {
-          // Otherwise just display the text
-          span.textContent = todo.text;
-        }
+        span.textContent = list.text;
 
         const deleteButton = this.createElement('button', 'delete');
         deleteButton.textContent = 'Delete';
-        li.append(checkbox, span, deleteButton);
+        li.append(span, deleteButton);
 
-        this.todo.append(li);
+        this.list.append(li);
       });
     }
   }
 
   bindAddList(handler) {
-    this.todoForm.addEventListener('submit', (e) => {
+    this.listForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      if (this.todoText) {
-        handler(this.todoText);
+      if (this.listText) {
+        handler(this.listText);
         this.resetInput();
       }
     });
   }
 
   bindDeleteList(handler) {
-    this.todos.addEventListener('click', (e) => {
+    this.lists.addEventListener('click', (e) => {
       if (e.target.className === 'delete') {
-        const id = parseInt(e.target.parentElement.id, 10);
-
+        const id = parseInt(e.target.parentElement.id);
         handler(id);
       }
     });
