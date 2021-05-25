@@ -10,6 +10,11 @@ class Controller {
     this.todoview.bindDeleteTodo(this.handleDeleteTodo);
     this.todoview.bindToggleTodo(this.handleToggleTodo);
     this.todomodel.bindTodoListChanged(this.onTodoListChanged);
+
+    this.onListChanged(this.listmodel.list);
+    this.listview.bindAddList(this.handleAddList);
+    this.listview.bindDeleteList(this.handleDeleteList);
+    this.listmodel.bindListChanged(this.onListChanged);
   }
 
   onTodoListChanged = (todos) => {
