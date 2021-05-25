@@ -36,6 +36,18 @@ class Controller {
   handleToggleTodo = (id) => {
     this.todomodel.toggleTodo(id);
   };
+
+  onListChanged = (list) => {
+    this.listview.renderList(list);
+  }
+
+  handleAddList = (listText) => {
+    this.listmodel.addList(listText);
+  }
+
+  handleDeleteList = (listText) => {
+    this.listmodel.deleteList(listText);
+  }
 }
 
 export { Controller as default };
