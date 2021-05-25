@@ -4,14 +4,14 @@ class TodoModel {
     this.todos = [
       {
         id: 1,
-        text: 'Run a JS Marathon',
+        text: 'Hello marathon',
         complete: false,
         due: new Date().getDate().toString(),
         group: '',
       },
       {
         id: 2,
-        text: 'Run a Ruby ',
+        text: 'Helllo second time',
         complete: false,
         due: new Date().getDate().toString(),
         group: '',
