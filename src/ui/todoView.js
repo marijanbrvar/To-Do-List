@@ -72,7 +72,6 @@ class ToDoView {
         span.classList.add('editable');
 
         if (todo.complete) {
-          console.log('complete');
           const strike = this.createElement('s');
           strike.textContent = todo.text;
           span.append(strike);
