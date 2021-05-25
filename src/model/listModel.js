@@ -2,12 +2,12 @@ class ListModel {
   constructor() {
     this.list = [
       {
-        id: new Date().getTime().toString() + 1,
-        text: 'Run a JS Marathon',
+        id: 1,
+        text: 'myList',
         todos: [],
       },
       {
-        id: new Date().getTime().toString(),
+        id: 2,
         text: 'Run a Ruby ',
         todos: [],
       },
@@ -15,33 +15,24 @@ class ListModel {
   }
 
   addList(listText) {
-    const todo = {
-      id: new Date().getTime().toString(),
+    const item = {
+      id: this.list.length + 1,
       text: listText,
       todos: [],
     };
 
-    this.todos.push(todo);
-  }
-
-  editList(id, updatedText) {
-    this.list = this.list.map((item) => (item.id === id
-      ? {
-        id: item.id,
-        text: updatedText,
-        todos: [],
-      }
-      : item));
+    this.list.push(item);
+    this.onListChanged(this.list);
   }
 
   deleteList(id) {
-    this.list = this.list.filter((list) => list.id !== id);
+    this.list = this.list.filter((item) => item.id !== id);
 
-    this.onListChanged(this.todos);
+    this.onListChanged(this.list);
   }
 
   bindListChanged(callback) {
-    this.onTodoListChanged = callback;
+    this.onListChanged = callback;
   }
 }
 
