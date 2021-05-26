@@ -1,22 +1,30 @@
+const LOCAL_STORAGE_LISTS = 'task.lists';
+const LOCAL_STORAGE_LISTS_ID_KEY = 'task.selectdListIdKey';
+
 class ListModel {
   constructor() {
-    this.list = JSON.parse(localStorage.getItem('list')) || [
-      {
-        id: 1,
-        text: 'myList',
-        todos: [],
-      },
-      {
-        id: 2,
-        text: 'Run a Ruby ',
-        todos: [],
-      },
+    this.list = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [
+      // {
+      //   id: 1,
+      //   text: 'myList',
+      //   todos: [],
+      // },
+      // {
+      //   id: 2,
+      //   text: 'Run a Ruby ',
+      //   todos: [],
+      // },
     ];
+    this.selectedList = localStorage.getItem(LOCAL_STORAGE_LISTS_ID_KEY);
+  }
+
+  selectedList(element) {
+    if (this.list.id === this.selectedList) element.classList.add('active-list');
   }
 
   commit(list) {
     this.onListChanged(list);
-    localStorage.setItem('list', JSON.stringify(list));
+    localStorage.setItem(LOCAL_STORAGE_LISTS, JSON.stringify(list));
   }
 
   addList(listText) {
