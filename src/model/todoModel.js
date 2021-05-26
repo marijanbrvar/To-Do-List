@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
+const LOCAL_STORAGE_TODOS = 'task.todos';
 class TodoModel {
   constructor() {
-    this.todos = JSON.parse(localStorage.getItem('todos')) || [
+    this.todos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS)) || [
       // {
       //   id: 1,
       //   text: 'Hello marathon',
@@ -21,7 +22,7 @@ class TodoModel {
 
   commit(todos) {
     this.onTodoListChanged(todos);
-    localStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem(LOCAL_STORAGE_TODOS, JSON.stringify(todos));
   }
 
   addTodo(todoText) {
