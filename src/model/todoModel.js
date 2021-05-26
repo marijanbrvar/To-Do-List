@@ -1,22 +1,27 @@
 /* eslint-disable max-len */
 class TodoModel {
   constructor() {
-    this.todos = [
-      {
-        id: 1,
-        text: 'Hello marathon',
-        complete: false,
-        due: new Date().getDate().toString(),
-        group: '',
-      },
-      {
-        id: 2,
-        text: 'Helllo second time',
-        complete: false,
-        due: new Date().getDate().toString(),
-        group: '',
-      },
+    this.todos = JSON.parse(localStorage.getItem('todos')) || [
+      // {
+      //   id: 1,
+      //   text: 'Hello marathon',
+      //   complete: false,
+      //   due: new Date().getDate().toString(),
+      //   group: '',
+      // },
+      // {
+      //   id: 2,
+      //   text: 'Helllo second time',
+      //   complete: false,
+      //   due: new Date().getDate().toString(),
+      //   group: '',
+      // },
     ];
+  }
+
+  commit(todos) {
+    this.onTodoListChanged(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
   }
 
   addTodo(todoText) {
@@ -28,6 +33,7 @@ class TodoModel {
       group: '',
     };
     this.todos.push(todo);
+    this.commit(this.todos);
     this.onTodoListChanged(this.todos);
   }
 
@@ -46,6 +52,7 @@ class TodoModel {
   deleteTodo(id) {
     this.todos = this.todos.filter((todo) => todo.id !== id);
 
+    this.commit(this.todos);
     this.onTodoListChanged(this.todos);
   }
 
