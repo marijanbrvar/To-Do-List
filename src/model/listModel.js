@@ -1,6 +1,6 @@
 class ListModel {
   constructor() {
-    this.list = [
+    this.list = JSON.parse(localStorage.getItem('list')) || [
       {
         id: 1,
         text: 'myList',
@@ -14,6 +14,11 @@ class ListModel {
     ];
   }
 
+  commit(list) {
+    this.onListChanged(list);
+    localStorage.setItem('list', JSON.stringify(list));
+  }
+
   addList(listText) {
     const item = {
       id: this.list.length + 1,
@@ -22,12 +27,13 @@ class ListModel {
     };
 
     this.list.push(item);
+    this.commit(this.list);
     this.onListChanged(this.list);
   }
 
   deleteList(id) {
     this.list = this.list.filter((item) => item.id !== id);
-
+    this.commit(this.list);
     this.onListChanged(this.list);
   }
 
