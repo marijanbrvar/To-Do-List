@@ -65,8 +65,6 @@ class ListView {
         li.id = list.id;
 
         const span = this.createElement('span');
-        span.contentEditable = true;
-        span.classList.add('editable');
         span.textContent = list.text;
 
         const deleteButton = this.createElement('button', 'delete');
