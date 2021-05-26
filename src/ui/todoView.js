@@ -1,4 +1,3 @@
-/* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
 import './styles/app.scss';
 
@@ -76,7 +75,6 @@ class ToDoView {
           strike.textContent = todo.text;
           span.append(strike);
         } else {
-          // Otherwise just display the text
           span.textContent = todo.text;
         }
 
@@ -103,7 +101,7 @@ class ToDoView {
   bindDeleteTodo(handler) {
     this.todos.addEventListener('click', (e) => {
       if (e.target.className === 'delete') {
-        const id = parseInt(e.target.parentElement.id);
+        const id = parseInt(e.target.parentElement.id, 10);
         handler(id);
       }
     });
@@ -112,7 +110,7 @@ class ToDoView {
   bindToggleTodo(handler) {
     this.todos.addEventListener('change', (e) => {
       if (e.target.type === 'checkbox') {
-        const id = parseInt(e.target.parentElement.id);
+        const id = parseInt(e.target.parentElement.id, 10);
 
         handler(id);
       }
