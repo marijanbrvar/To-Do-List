@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable radix */
 /* eslint-disable class-methods-use-this */
 import './styles/app.scss';
@@ -81,6 +82,7 @@ class ListView {
     this.lists.addEventListener('click', (e) => {
       if (e.target.className === 'list-text') {
         const id = parseInt(e.target.parentElement.id);
+        location.reload();
         handler(id);
       }
     });
@@ -92,6 +94,7 @@ class ListView {
 
       if (this.listText) {
         handler(this.listText);
+        location.reload();
         this.resetInput();
       }
     });
@@ -102,6 +105,7 @@ class ListView {
       if (e.target.className === 'delete') {
         const id = parseInt(e.target.parentElement.id);
         handler(id);
+        location.reload();
       }
     });
   }

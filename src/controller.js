@@ -23,7 +23,7 @@ class Controller {
   };
 
   handleAddTodo = (todoText) => {
-    this.todomodel.addTodo(todoText);
+    this.todomodel.addTodo(todoText, this.listmodel.selectedList);
   };
 
   handleEditTodo = (id, todoText) => {

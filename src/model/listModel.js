@@ -28,6 +28,7 @@ class ListModel {
 
     this.list.push(item);
     this.commit(this.list);
+    localStorage.setItem(LOCAL_STORAGE_LISTS_ID_KEY, item.id);
     this.onListChanged(this.list);
   }
 

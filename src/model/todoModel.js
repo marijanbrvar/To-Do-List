@@ -10,13 +10,13 @@ class TodoModel {
     localStorage.setItem(LOCAL_STORAGE_TODOS, JSON.stringify(todos));
   }
 
-  addTodo(todoText) {
+  addTodo(todoText, list) {
     const todo = {
       id: this.todos.length + 1,
       text: todoText,
       complete: false,
       due: new Date().getDate().toString(),
-      group: '',
+      belongs: list,
     };
     this.todos.push(todo);
     this.commit(this.todos);
