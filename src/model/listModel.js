@@ -33,7 +33,7 @@ class ListModel {
 
   deleteList(id) {
     this.list = this.list.filter((item) => item.id !== id);
-    const newId = this.list[0].id;
+    const newId = this.list.length ? this.list[0].id : 0;
     this.commit(this.list);
     localStorage.setItem(LOCAL_STORAGE_LISTS_ID_KEY, newId);
     this.onListChanged(this.list);
