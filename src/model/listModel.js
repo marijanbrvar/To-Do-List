@@ -1,25 +1,17 @@
+/* eslint-disable class-methods-use-this */
 const LOCAL_STORAGE_LISTS = 'task.lists';
 const LOCAL_STORAGE_LISTS_ID_KEY = 'task.selectdListIdKey';
 
 class ListModel {
   constructor() {
     this.list = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [
-      // {
-      //   id: 1,
-      //   text: 'myList',
-      //   todos: [],
-      // },
-      // {
-      //   id: 2,
-      //   text: 'Run a Ruby ',
-      //   todos: [],
-      // },
+      {
+        id: 1,
+        text: 'myList',
+        todos: [],
+      },
     ];
     this.selectedList = localStorage.getItem(LOCAL_STORAGE_LISTS_ID_KEY);
-  }
-
-  selectedList(element) {
-    if (this.list.id === this.selectedList) element.classList.add('active-list');
   }
 
   commit(list) {
@@ -41,7 +33,14 @@ class ListModel {
 
   deleteList(id) {
     this.list = this.list.filter((item) => item.id !== id);
+    const newId = this.list[0].id;
     this.commit(this.list);
+    localStorage.setItem(LOCAL_STORAGE_LISTS_ID_KEY, newId);
+    this.onListChanged(this.list);
+  }
+
+  selectedLists(id) {
+    localStorage.setItem(LOCAL_STORAGE_LISTS_ID_KEY, id);
     this.onListChanged(this.list);
   }
 

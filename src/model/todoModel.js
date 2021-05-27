@@ -2,22 +2,7 @@
 const LOCAL_STORAGE_TODOS = 'task.todos';
 class TodoModel {
   constructor() {
-    this.todos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS)) || [
-      // {
-      //   id: 1,
-      //   text: 'Hello marathon',
-      //   complete: false,
-      //   due: new Date().getDate().toString(),
-      //   group: '',
-      // },
-      // {
-      //   id: 2,
-      //   text: 'Helllo second time',
-      //   complete: false,
-      //   due: new Date().getDate().toString(),
-      //   group: '',
-      // },
-    ];
+    this.todos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS)) || [];
   }
 
   commit(todos) {

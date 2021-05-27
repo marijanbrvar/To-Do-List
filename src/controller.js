@@ -15,6 +15,7 @@ class Controller {
     this.listview.bindAddList(this.handleAddList);
     this.listview.bindDeleteList(this.handleDeleteList);
     this.listmodel.bindListChanged(this.onListChanged);
+    this.listview.bindSelectedList(this.handleSelectedList);
   }
 
   onTodoListChanged = (todos) => {
@@ -38,7 +39,7 @@ class Controller {
   };
 
   onListChanged = (list) => {
-    this.listview.renderList(list);
+    this.listview.renderList(list, this.listmodel.selectedList);
   }
 
   handleAddList = (listText) => {
@@ -47,6 +48,10 @@ class Controller {
 
   handleDeleteList = (listText) => {
     this.listmodel.deleteList(listText);
+  }
+
+  handleSelectedList = (id) => {
+    this.listmodel.selectedLists(id);
   }
 }
 

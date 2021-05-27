@@ -50,7 +50,7 @@ class ListView {
     this.listInput.value = '';
   }
 
-  renderList(projList) {
+  renderList(projList, selectedList) {
     while (this.list.firstChild) {
       this.list.removeChild(this.list.firstChild);
     }
@@ -63,17 +63,27 @@ class ListView {
       projList.forEach((list) => {
         const li = this.createElement('li', 'list-item');
         li.id = list.id;
-
         const span = this.createElement('span');
         span.textContent = list.text;
-
+        span.classList.add('list-text');
+        if (list.id === parseInt(selectedList)) {
+          li.classList.add('active');
+        }
         const deleteButton = this.createElement('button', 'delete');
         deleteButton.textContent = 'Delete';
         li.append(span, deleteButton);
-
         this.list.append(li);
       });
     }
+  }
+
+  bindSelectedList(handler) {
+    this.lists.addEventListener('click', (e) => {
+      if (e.target.className === 'list-text') {
+        const id = parseInt(e.target.parentElement.id);
+        handler(id);
+      }
+    });
   }
 
   bindAddList(handler) {
