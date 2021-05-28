@@ -94,6 +94,19 @@ class Screen {
     target.append(nav, jobForm);
     return nav;
   }
+
+  buildBlankSlate(title, text) {
+    const blankSlate = document.createElement('div');
+    const blankSlateTitle = document.createElement('h3');
+    const blankSlateText = document.createElement('p');
+    blankSlate.classList.add('blankslate');
+    blankSlateTitle.classList.add('mb-1');
+    blankSlateTitle.innerText = title;
+    blankSlateText.innerText = text;
+    blankSlate.append(blankSlateTitle, blankSlateText);
+    this.jobs.append(blankSlate);
+    return blankSlate;
+  }
 }
 
 export { Screen as default };
