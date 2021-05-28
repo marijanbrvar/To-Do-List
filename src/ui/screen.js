@@ -53,7 +53,7 @@ class Screen {
     const headerLink = document.createElement('a');
     headerLink.href = '/';
     headerLink.classList.add('Header-link');
-    header.classList.add('Header', 'mb-5');
+    header.classList.add('Header', 'mb-3');
     headerItem.classList.add('Header-item');
     headerLink.innerText = title;
     header.appendChild(headerItem);
@@ -80,7 +80,7 @@ class Screen {
     menuTitle.setAttribute('id', 'menu-heading');
     menuTitle.innerText = title;
     nav.appendChild(menuTitle);
-    nav.classList.add('menu');
+    nav.classList.add('menu', 'mt-6');
     nav.setAttribute('aria-label', 'Person settings');
     jobs.forEach((item) => {
       const link = document.createElement('a');
@@ -115,7 +115,7 @@ class Screen {
     const jobsHeader = document.createElement('div');
     const jobsTitle = document.createElement('h3');
     const counter = document.createElement('span');
-    counter.classList.add('Counter', 'Counter--gray-dark');
+    counter.classList.add('Counter', 'Counter--gray-dark', 'ml-2');
     counter.innerText = jobsList.length;
     jobsBox.classList.add('Box', 'mb-4');
     jobsHeader.classList.add('Box-header', 'Box-header--blue');
@@ -139,7 +139,7 @@ class Screen {
       description.innerHTML = `
       <div><strong>Due:</strong> ${item.due}</div>
       <strong>Desc:</strong> ${item.description}
-      <div class="text-bold ${item.weigth === 'Height' ? 'color-text-danger' : item.weigth === 'Medium' ? 'color-text-warning' : 'color-text-success'}"><strong>Priority:</strong> ${item.weigth}</div> 
+      <div class="text-bold ${item.weigth === 'Heigh' ? 'color-text-danger' : item.weigth === 'Medium' ? 'color-text-warning' : 'color-text-success'}"><strong>Priority:</strong> ${item.weigth}</div> 
       `;
       boxContent.append(boxTitle, description);
       boxRow.append(boxContent, button);
@@ -149,6 +149,84 @@ class Screen {
     target.appendChild(jobsBox);
 
     return jobsBox;
+  }
+
+  buildNewJobButton() {
+    const target = document.querySelector('#jobs');
+    const actionBar = document.createElement('div');
+    const button = document.createElement('button');
+    actionBar.classList.add('mb-2', 'text-right');
+    button.classList.add('btn', 'btn-outline');
+    button.innerText = 'New Job';
+    actionBar.append(button);
+    target.appendChild(actionBar);
+
+    return button;
+  }
+
+  buildNewJobForm() {
+    const target = document.querySelector('#jobs');
+    const formBox = document.createElement('div');
+    const formHeader = document.createElement('div');
+    const formTitle = document.createElement('h3');
+    const formBody = document.createElement('div');
+    const formFooter = document.createElement('div');
+    formBody.classList.add('Box-body');
+    formFooter.classList.add('Box-footer', 'text-right');
+    formTitle.classList.add('Box-title');
+    formTitle.innerText = 'New Job Form';
+    formHeader.classList.add('Box-header', 'Box-header--blue');
+    formBox.classList.add('Box');
+    formBody.classList.add('Box-body');
+    formBody.innerHTML = `
+    <div class="form-group">
+      <div class="form-group-header">
+        <label>Title</label>
+      </div>
+      <div class="form-group-body">
+        <input class="form-control input-block" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-group-header">
+        <label>Description</label>
+      </div>
+      <div class="form-group-body">
+        <input class="form-control input-block" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-group-header">
+        <label>Priority</label>
+      </div>
+      <div class="radio-group">
+      <input class="radio-input" id="normal" type="radio" name="options">
+      <label class="radio-label" for="normal">Normal</label>
+      <input class="radio-input" id="medium" type="radio" name="options">
+      <label class="radio-label" for="medium">Medium</label>
+      <input class="radio-input" id="height" type="radio" name="options">
+      <label class="radio-label" for="height">Heigh</label>
+    </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="form-group-header">
+        <label>Due date:</label>
+      </div>
+      <div class="form-group-body">
+        <input class="form-control input-block" type="date">
+      </div>
+    </div>
+    `;
+    formFooter.innerHTML = `
+    <button class="btn btn-secondary mr-1">Cancel</button>
+    <button class="btn btn-primary">Submit</button>
+    `;
+    formHeader.append(formTitle);
+    formBox.append(formHeader, formBody, formFooter);
+    target.appendChild(formBox);
+
+    return formBox;
   }
 }
 

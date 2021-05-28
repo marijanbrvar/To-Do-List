@@ -8,10 +8,11 @@ const add = function add() {
     { id: 1, name: 'Job 1', active: true },
     { id: 2, name: 'Job 2', active: false },
   ]);
-  app.buildBlankSlate(
-    'This is a blank slate',
-    'Use it to provide information when no dynamic content exists.',
-  );
+  // app.buildBlankSlate(
+  //   'This is a blank slate',
+  //   'Use it to provide information when no dynamic content exists.',
+  // );
+  app.buildNewJobButton();
   app.buildJobItemsList('Job 1 list', [
     {
       id: 1,
@@ -25,11 +26,12 @@ const add = function add() {
       id: 2,
       title: 'A bit longer title',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus voluptatem ipsa ut sit nesciunt quisquam culpa, consequatur error.',
-      weigth: 'Height',
+      weigth: 'Heigh',
       completed: true,
       due: '2021/4/28',
     },
   ]);
+  app.buildNewJobForm();
 };
 add();
 console.log(app);
