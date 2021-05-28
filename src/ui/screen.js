@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable class-methods-use-this */
 class Screen {
   constructor() {
@@ -45,7 +46,7 @@ class Screen {
     return form;
   }
 
-  static buildHeader(title) {
+  buildHeader(title) {
     const target = document.querySelector('BODY');
     const header = document.createElement('div');
     const headerItem = document.createElement('div');
@@ -62,7 +63,7 @@ class Screen {
     return header;
   }
 
-  static buildSideList(title, jobs) {
+  buildSideList(title, jobs) {
     const target = document.querySelector('#list');
     const nav = document.createElement('nav');
     const menuTitle = document.createElement('span');
@@ -106,6 +107,48 @@ class Screen {
     blankSlate.append(blankSlateTitle, blankSlateText);
     this.jobs.append(blankSlate);
     return blankSlate;
+  }
+
+  buildJobItemsList(listName, jobsList) {
+    const target = document.querySelector('#jobs');
+    const jobsBox = document.createElement('div');
+    const jobsHeader = document.createElement('div');
+    const jobsTitle = document.createElement('h3');
+    const counter = document.createElement('span');
+    counter.classList.add('Counter', 'Counter--gray-dark');
+    counter.innerText = jobsList.length;
+    jobsBox.classList.add('Box', 'mb-4');
+    jobsHeader.classList.add('Box-header', 'Box-header--blue');
+    jobsTitle.classList.add('Box-title');
+    jobsTitle.innerText = listName;
+    jobsTitle.appendChild(counter);
+    jobsHeader.appendChild(jobsTitle);
+    jobsBox.appendChild(jobsHeader);
+    jobsList.forEach((item) => {
+      const boxRow = document.createElement('div');
+      const boxContent = document.createElement('div');
+      const boxTitle = document.createElement('strong');
+      const description = document.createElement('div');
+      const button = document.createElement('button');
+      button.classList.add('btn', 'btn-sm');
+      button.innerText = item.completed ? 'Finished' : 'In progress...';
+      boxRow.classList.add('Box-row', 'd-flex', 'flex-items-center');
+      boxContent.classList.add('flex-auto');
+      description.classList.add('text-small', 'text-gray-light');
+      boxTitle.innerText = item.title;
+      description.innerHTML = `
+      <div><strong>Due:</strong> ${item.due}</div>
+      <strong>Desc:</strong> ${item.description}
+      <div class="text-bold ${item.weigth === 'Height' ? 'color-text-danger' : item.weigth === 'Medium' ? 'color-text-warning' : 'color-text-success'}"><strong>Priority:</strong> ${item.weigth}</div> 
+      `;
+      boxContent.append(boxTitle, description);
+      boxRow.append(boxContent, button);
+
+      jobsBox.append(boxRow);
+    });
+    target.appendChild(jobsBox);
+
+    return jobsBox;
   }
 }
 
