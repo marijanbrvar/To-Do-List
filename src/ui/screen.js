@@ -94,18 +94,6 @@ class Screen {
     target.append(nav, jobForm);
     return nav;
   }
-
-  // <nav class="menu" aria-label="Person settings">
-  //       <span class="menu-heading" id="menu-heading">Menu heading</span>
-  //       <a class="menu-item" href="#url" aria-current="page">Account</a>
-  //       <a class="menu-item" href="#url">Profile</a>
-  //       <a class="menu-item" href="#url">Emails</a>
-  //       <a class="menu-item" href="#url">Notifications</a>
-  //     </nav>
-  //     <form>
-  //       <input class="form-control input-md" type="text" placeholder="Small input" aria-label="Small input" />
-  //       <button class="btn-link" type="button">Add</button>
-  //     </form>
 }
 
 export { Screen as default };
