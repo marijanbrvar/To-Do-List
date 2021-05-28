@@ -19,7 +19,7 @@ class Controller {
   }
 
   onTodoListChanged = (todos) => {
-    this.todoview.renderToDos(todos);
+    this.todoview.renderToDos(todos, this.listmodel.selectedList);
   };
 
   handleAddTodo = (todoText) => {

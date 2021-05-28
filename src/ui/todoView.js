@@ -48,7 +48,8 @@ class ToDoView {
     this.todoInput.value = '';
   }
 
-  renderToDos(todosList) {
+  renderToDos(todosList, selected) {
+    console.log(selected);
     while (this.todo.firstChild) {
       this.todo.removeChild(this.todo.firstChild);
     }
