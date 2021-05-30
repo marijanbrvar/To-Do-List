@@ -1,8 +1,9 @@
 import Screen from './ui/screen';
 
-const LOCAL_STORAGE_LIST_KEY = 'task.lists';
+const LOCAL_STORAGE_JOB_LIST_KEY = 'jobs.lists';
+const LOCAL_STORAGE_SELECTED_JOB_LIST_ID_KEY = 'jobs.selectedListId';
 
-const lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
+const lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_JOB_LIST_KEY)) || [];
 const jobs = [
   {
     id: 1,
@@ -38,18 +39,26 @@ const add = function add() {
 add();
 
 const newListForm = document.querySelector('#job-form');
+const jobList = document.querySelector('nav');
+
+function resetActivJobList() {
+  const currentActive = lists.findIndex((obj) => obj.active === true);
+  lists[currentActive].active = false;
+}
 
 function createJobList(name) {
+  resetActivJobList();
   return {
     id: lists.length + 1,
     name,
-    active: false,
+    active: true,
     lists: [],
   };
 }
 
-const save = (lists) => {
-  localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists));
+const saveAndRefresh = (lists) => {
+  localStorage.setItem(LOCAL_STORAGE_JOB_LIST_KEY, JSON.stringify(lists));
+  window.location.reload();
 };
 
 newListForm.addEventListener('submit', (e) => {
@@ -59,6 +68,14 @@ newListForm.addEventListener('submit', (e) => {
   const jobList = createJobList(jobName);
   newListForm.jobInput.value = null;
   lists.push(jobList);
-  save(lists);
+  saveAndRefresh(lists);
   app.addToList('nav', 'a', jobList);
+});
+
+jobList.addEventListener('click', (e) => {
+  const currentId = e.target.id;
+  resetActivJobList();
+  const job = lists.findIndex((obj) => obj.id === parseInt(currentId, 10));
+  lists[job].active = true;
+  saveAndRefresh(lists);
 });
