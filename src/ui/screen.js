@@ -13,11 +13,13 @@ class Screen {
     this.container.append(this.list, this.jobs);
   }
 
-  static addToList(selector, tagName, text) {
+  addToList(selector, tagName, text) {
     const targetElement = document.querySelector(selector);
     const element = document.createElement(tagName);
-    element.innerText = text;
+    element.innerText = text.name;
     element.classList.add('menu-item');
+    element.setAttribute('aria-current', 'page');
+    element.id = text.id;
     targetElement.appendChild(element);
     return element;
   }
@@ -74,9 +76,10 @@ class Screen {
     jobButton.type = 'submit';
     jobButton.innerText = 'Add';
     jobInput.classList.add('form-control', 'input-md');
+    jobInput.name = 'jobInput';
     jobForm.append(jobInput, jobButton);
     jobForm.setAttribute('id', 'job-form');
-    menuTitle.classList.add('menu-heading');
+    menuTitle.classList.add('menu-heading', 'color-bg-info');
     menuTitle.setAttribute('id', 'menu-heading');
     menuTitle.innerText = title;
     nav.appendChild(menuTitle);
