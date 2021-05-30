@@ -1,9 +1,8 @@
 import Screen from './ui/screen';
 
 const LOCAL_STORAGE_JOB_LIST_KEY = 'jobs.lists';
-const LOCAL_STORAGE_SELECTED_JOB_LIST_ID_KEY = 'jobs.selectedListId';
 
-const lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_JOB_LIST_KEY)) || [];
+let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_JOB_LIST_KEY)) || [];
 const jobs = [
   {
     id: 1,
@@ -33,6 +32,7 @@ const add = function add() {
   //   'Use it to provide information when no dynamic content exists.',
   // );
   app.buildNewJobButton();
+  app.buildDeleteJobButton();
   app.buildJobItemsList('Job 1 list', jobs);
   app.buildNewJobForm();
 };
@@ -40,6 +40,7 @@ add();
 
 const newListForm = document.querySelector('#job-form');
 const jobList = document.querySelector('nav');
+const deleteJobListButton = document.querySelector('#delete');
 
 function resetActivJobList() {
   if (lists.length !== 0) {
@@ -81,3 +82,17 @@ jobList.addEventListener('click', (e) => {
   lists[job].active = true;
   saveAndRefresh(lists);
 });
+
+if (lists.length === 0) {
+  deleteJobListButton.setAttribute('aria-disabled', 'true');
+} else {
+  deleteJobListButton.setAttribute('aria-disabled', 'false');
+  deleteJobListButton.addEventListener('click', () => {
+    const currentId = lists.findIndex((obj) => obj.active === true);
+    lists = lists.filter((x) => x.id !== lists[currentId].id);
+    if (lists.length !== 0) lists[0].active = true;
+    if (lists.length === 0) lists = [];
+    // console.log(lists);
+    saveAndRefresh(lists);
+  });
+}

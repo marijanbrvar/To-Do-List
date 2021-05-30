@@ -157,12 +157,25 @@ class Screen {
   buildNewJobButton() {
     const target = document.querySelector('#jobs');
     const actionBar = document.createElement('div');
+    actionBar.id = 'action-bar';
     const button = document.createElement('button');
     actionBar.classList.add('mb-2', 'text-right');
     button.classList.add('btn', 'btn-outline');
     button.innerText = 'New Job';
+    button.id = 'new';
     actionBar.append(button);
     target.appendChild(actionBar);
+
+    return button;
+  }
+
+  buildDeleteJobButton() {
+    const actionBar = document.querySelector('#action-bar');
+    const button = document.createElement('button');
+    button.classList.add('btn', 'btn-outline', 'mr-2');
+    button.innerText = 'Delete Job';
+    button.id = 'delete';
+    actionBar.prepend(button);
 
     return button;
   }
