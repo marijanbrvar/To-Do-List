@@ -42,8 +42,10 @@ const newListForm = document.querySelector('#job-form');
 const jobList = document.querySelector('nav');
 
 function resetActivJobList() {
-  const currentActive = lists.findIndex((obj) => obj.active === true);
-  lists[currentActive].active = false;
+  if (lists.length !== 0) {
+    const currentActive = lists.findIndex((obj) => obj.active === true);
+    lists[currentActive].active = false;
+  }
 }
 
 function createJobList(name) {
