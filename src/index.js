@@ -16,13 +16,13 @@ const render = function render() {
   app.buildSideList('Job list', lists);
   app.buildNewJobButton();
   app.buildDeleteJobButton();
-  if (lists[currentlyActive()].jobtasks.length === 0) {
+  if (lists.length === 0 || lists[currentlyActive()].jobtasks.length === 0) {
     app.buildBlankSlate(
       'This is a blank slate',
       'Use it to provide information when no dynamic content exists.',
     );
   }
-  if (lists[currentlyActive()].jobtasks.length !== 0) {
+  if (lists.length !== 0 && lists[currentlyActive()].jobtasks.length !== 0) {
     app.buildJobItemsList(lists[currentlyActive()].name, lists[currentlyActive()].jobtasks);
   }
   app.buildNewJobForm();
