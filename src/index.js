@@ -35,6 +35,7 @@ const deleteJobListButton = document.querySelector('#delete');
 const newTaskButton = document.querySelector('#new');
 const hideNewTaskButton = document.querySelector('#cancle');
 const newTaskForm = document.querySelector('#newtask');
+const tasksList = document.querySelector('.tasks');
 
 function resetActivJobList() {
   if (lists.length !== 0) {
@@ -112,6 +113,15 @@ newTaskForm.addEventListener('submit', (e) => {
     description,
     weigth,
     due,
+    completed: false,
   });
+  saveAndRefresh(lists);
+});
+
+tasksList.addEventListener('click', (e) => {
+  const taskId = e.target.parentElement.id;
+  const idx = lists[currentlyActive()].jobtasks.findIndex((x) => x.id === parseInt(taskId, 10));
+  const completed = lists[currentlyActive()].jobtasks[idx];
+  completed.completed = !completed.completed;
   saveAndRefresh(lists);
 });

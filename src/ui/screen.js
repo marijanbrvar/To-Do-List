@@ -120,7 +120,7 @@ class Screen {
     const counter = document.createElement('span');
     counter.classList.add('Counter', 'Counter--gray-dark', 'ml-2');
     counter.innerText = jobsList.length;
-    jobsBox.classList.add('Box', 'mb-4');
+    jobsBox.classList.add('Box', 'mb-4', 'tasks');
     jobsHeader.classList.add('Box-header', 'Box-header--blue');
     jobsTitle.classList.add('Box-title');
     jobsTitle.innerText = listName;
@@ -133,6 +133,8 @@ class Screen {
       const boxTitle = document.createElement('strong');
       const description = document.createElement('div');
       const button = document.createElement('button');
+      boxRow.setAttribute('data-tasks-item', '');
+      boxRow.id = item.id;
       button.classList.add('btn', 'btn-sm');
       button.innerText = item.completed ? 'Finished' : 'In progress...';
       boxRow.classList.add('Box-row', 'd-flex', 'flex-items-center');
@@ -142,7 +144,7 @@ class Screen {
       description.innerHTML = `
       <div><strong>Due:</strong> ${item.due}</div>
       <strong>Desc:</strong> ${item.description}
-      <div class="text-bold ${item.weigth === 'Heigh' ? 'color-text-danger' : item.weigth === 'Medium' ? 'color-text-warning' : 'color-text-success'}"><strong>Priority:</strong> ${item.weigth}</div> 
+      <div class="text-bold ${item.weigth === 'heigh' ? 'color-text-danger' : item.weigth === 'medium' ? 'color-text-warning' : 'color-text-success'}"><strong>Priority:</strong> ${item.weigth}</div> 
       `;
       boxContent.append(boxTitle, description);
       boxRow.append(boxContent, button);
