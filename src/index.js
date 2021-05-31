@@ -24,23 +24,31 @@ const jobs = [
 
 const app = new Screen();
 
-const add = function add() {
+const currentlyActive = () => {
+  const current = lists.findIndex((obj) => obj.active === true);
+  return current;
+};
+
+const render = function render() {
   app.buildHeader('Things need to be done!');
   app.buildSideList('Job list', lists);
-  // app.buildBlankSlate(
-  //   'This is a blank slate',
-  //   'Use it to provide information when no dynamic content exists.',
-  // );
   app.buildNewJobButton();
   app.buildDeleteJobButton();
-  app.buildJobItemsList('Job 1 list', jobs);
+  app.buildBlankSlate(
+    'This is a blank slate',
+    'Use it to provide information when no dynamic content exists.',
+  );
+  app.buildJobItemsList('Job 1 list', lists[currentlyActive()].jobtasks);
   app.buildNewJobForm();
 };
-add();
+render();
 
 const newListForm = document.querySelector('#job-form');
 const jobList = document.querySelector('nav');
 const deleteJobListButton = document.querySelector('#delete');
+const newTaskButton = document.querySelector('#new');
+const hideNewTaskButton = document.querySelector('#cancle');
+const newTaskForm = document.querySelector('#newtask');
 
 function resetActivJobList() {
   if (lists.length !== 0) {
@@ -55,7 +63,7 @@ function createJobList(name) {
     id: lists.length + 1,
     name,
     active: true,
-    lists: [],
+    jobtasks: [],
   };
 }
 
@@ -83,16 +91,42 @@ jobList.addEventListener('click', (e) => {
   saveAndRefresh(lists);
 });
 
-if (lists.length === 0) {
-  deleteJobListButton.setAttribute('aria-disabled', 'true');
-} else {
+if (lists.length !== 0) {
   deleteJobListButton.setAttribute('aria-disabled', 'false');
   deleteJobListButton.addEventListener('click', () => {
-    const currentId = lists.findIndex((obj) => obj.active === true);
-    lists = lists.filter((x) => x.id !== lists[currentId].id);
+    lists = lists.filter((x) => x.id !== lists[currentlyActive()].id);
     if (lists.length !== 0) lists[0].active = true;
     if (lists.length === 0) lists = [];
-    // console.log(lists);
     saveAndRefresh(lists);
   });
+  newTaskButton.addEventListener('click', (e) => {
+    const form = document.querySelector('#newtask');
+    form.style.display = 'block';
+  });
+
+  hideNewTaskButton.addEventListener('click', () => {
+    const form = document.querySelector('#newtask');
+    form.style.display = 'none';
+  });
+} else {
+  deleteJobListButton.setAttribute('aria-disabled', 'true');
+  newTaskButton.setAttribute('aria-disabled', 'true');
 }
+
+newTaskForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = e.target.title.value;
+  const description = e.target.desc.value;
+  const weigth = document.querySelector('input[name = "weigth"]:checked').value;
+  const due = e.target.due.value;
+
+  lists[currentlyActive()].jobtasks.push({
+    id: lists[currentlyActive()].jobtasks.length + 1,
+    title,
+    description,
+    weigth,
+    due,
+  });
+  console.log(lists);
+  saveAndRefresh(lists);
+});

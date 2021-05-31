@@ -161,7 +161,7 @@ class Screen {
     const button = document.createElement('button');
     actionBar.classList.add('mb-2', 'text-right');
     button.classList.add('btn', 'btn-outline');
-    button.innerText = 'New Job';
+    button.innerText = 'New Task';
     button.id = 'new';
     actionBar.append(button);
     target.appendChild(actionBar);
@@ -182,7 +182,7 @@ class Screen {
 
   buildNewJobForm() {
     const target = document.querySelector('#jobs');
-    const formBox = document.createElement('div');
+    const formBox = document.createElement('form');
     const formHeader = document.createElement('div');
     const formTitle = document.createElement('h3');
     const formBody = document.createElement('div');
@@ -193,6 +193,8 @@ class Screen {
     formTitle.innerText = 'New Job Form';
     formHeader.classList.add('Box-header', 'Box-header--blue');
     formBox.classList.add('Box');
+    formBox.id = 'newtask';
+    formBox.style.display = 'none';
     formBody.classList.add('Box-body');
     formBody.innerHTML = `
     <div class="form-group">
@@ -200,7 +202,7 @@ class Screen {
         <label>Title</label>
       </div>
       <div class="form-group-body">
-        <input class="form-control input-block" type="text">
+        <input class="form-control input-block" type="text" name="title">
       </div>
     </div>
     <div class="form-group">
@@ -208,7 +210,7 @@ class Screen {
         <label>Description</label>
       </div>
       <div class="form-group-body">
-        <input class="form-control input-block" type="text">
+        <input class="form-control input-block" type="text" name="desc">
       </div>
     </div>
     <div class="form-group">
@@ -216,11 +218,11 @@ class Screen {
         <label>Priority</label>
       </div>
       <div class="radio-group">
-      <input class="radio-input" id="normal" type="radio" name="options">
+      <input class="radio-input" id="normal" type="radio" name="weigth" value="normal">
       <label class="radio-label" for="normal">Normal</label>
-      <input class="radio-input" id="medium" type="radio" name="options">
+      <input class="radio-input" id="medium" type="radio" name="weigth" value="medium">
       <label class="radio-label" for="medium">Medium</label>
-      <input class="radio-input" id="height" type="radio" name="options">
+      <input class="radio-input" id="height" type="radio" name="weigth" value="heigh">
       <label class="radio-label" for="height">Heigh</label>
     </div>
     </div>
@@ -230,13 +232,13 @@ class Screen {
         <label>Due date:</label>
       </div>
       <div class="form-group-body">
-        <input class="form-control input-block" type="date">
+        <input class="form-control input-block" type="date" name='due'>
       </div>
     </div>
     `;
     formFooter.innerHTML = `
-    <button class="btn btn-secondary mr-1">Cancel</button>
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-secondary mr-1" id="cancle">Cancel</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
     `;
     formHeader.append(formTitle);
     formBox.append(formHeader, formBody, formFooter);
