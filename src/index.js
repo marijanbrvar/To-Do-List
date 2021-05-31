@@ -2,7 +2,14 @@ import Screen from './ui/screen';
 
 const LOCAL_STORAGE_JOB_LIST_KEY = 'jobs.lists';
 
-let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_JOB_LIST_KEY)) || [];
+let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_JOB_LIST_KEY)) || [
+  {
+    id: 1,
+    name: 'MyList',
+    active: true,
+    jobtasks: [],
+  },
+];
 
 const app = new Screen();
 
@@ -83,7 +90,7 @@ if (lists.length !== 0) {
   deleteJobListButton.addEventListener('click', () => {
     lists = lists.filter((x) => x.id !== lists[currentlyActive()].id);
     if (lists.length !== 0) lists[0].active = true;
-    if (lists.length === 0) lists = [];
+    if (lists.length === 0) lists = '';
     saveAndRefresh(lists);
   });
   newTaskButton.addEventListener('click', () => {
@@ -118,10 +125,21 @@ newTaskForm.addEventListener('submit', (e) => {
   saveAndRefresh(lists);
 });
 
-tasksList.addEventListener('click', (e) => {
-  const taskId = e.target.parentElement.id;
-  const idx = lists[currentlyActive()].jobtasks.findIndex((x) => x.id === parseInt(taskId, 10));
-  const completed = lists[currentlyActive()].jobtasks[idx];
-  completed.completed = !completed.completed;
-  saveAndRefresh(lists);
-});
+if (lists[currentlyActive()].jobtasks.length !== 0) {
+  tasksList.addEventListener('click', (e) => {
+    const taskId = e.target.parentElement.id;
+    const idx = lists[currentlyActive()].jobtasks.findIndex((x) => x.id === parseInt(taskId, 10));
+    if (lists[currentlyActive()].jobtasks.length === 0 || e.target.hasAttribute('data-status-button')) {
+      const completed = lists[currentlyActive()].jobtasks[idx];
+      completed.completed = !completed.completed;
+      saveAndRefresh(lists);
+    }
+    if (lists[currentlyActive()].jobtasks.length === 0 || e.target.parentElement.hasAttribute('data-delete-task')) {
+      const currentItem = parseInt(e.target.closest('.Box-row').id, 10);
+
+      const tasks = lists[currentlyActive()].jobtasks.filter((x) => x.id !== currentItem);
+      lists[currentlyActive()].jobtasks = tasks;
+      saveAndRefresh(lists);
+    }
+  });
+}
