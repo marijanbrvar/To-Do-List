@@ -3,24 +3,6 @@ import Screen from './ui/screen';
 const LOCAL_STORAGE_JOB_LIST_KEY = 'jobs.lists';
 
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_JOB_LIST_KEY)) || [];
-const jobs = [
-  {
-    id: 1,
-    title: 'Title',
-    description: 'Lorem ipsum dolar sit amet....',
-    weigth: 'Normal',
-    completed: false,
-    due: '2021/4/28',
-  },
-  {
-    id: 2,
-    title: 'A bit longer title',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus voluptatem ipsa ut sit nesciunt quisquam culpa, consequatur error.',
-    weigth: 'Heigh',
-    completed: true,
-    due: '2021/4/28',
-  },
-];
 
 const app = new Screen();
 
@@ -34,11 +16,15 @@ const render = function render() {
   app.buildSideList('Job list', lists);
   app.buildNewJobButton();
   app.buildDeleteJobButton();
-  app.buildBlankSlate(
-    'This is a blank slate',
-    'Use it to provide information when no dynamic content exists.',
-  );
-  app.buildJobItemsList('Job 1 list', lists[currentlyActive()].jobtasks);
+  if (lists[currentlyActive()].jobtasks.length === 0) {
+    app.buildBlankSlate(
+      'This is a blank slate',
+      'Use it to provide information when no dynamic content exists.',
+    );
+  }
+  if (lists[currentlyActive()].jobtasks.length !== 0) {
+    app.buildJobItemsList(lists[currentlyActive()].name, lists[currentlyActive()].jobtasks);
+  }
   app.buildNewJobForm();
 };
 render();
@@ -99,7 +85,7 @@ if (lists.length !== 0) {
     if (lists.length === 0) lists = [];
     saveAndRefresh(lists);
   });
-  newTaskButton.addEventListener('click', (e) => {
+  newTaskButton.addEventListener('click', () => {
     const form = document.querySelector('#newtask');
     form.style.display = 'block';
   });
@@ -127,6 +113,5 @@ newTaskForm.addEventListener('submit', (e) => {
     weigth,
     due,
   });
-  console.log(lists);
   saveAndRefresh(lists);
 });
