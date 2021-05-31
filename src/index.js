@@ -128,6 +128,7 @@ newTaskForm.addEventListener('submit', (e) => {
 if (lists[currentlyActive()].jobtasks.length !== 0) {
   tasksList.addEventListener('click', (e) => {
     const taskId = e.target.parentElement.id;
+    const currentItem = parseInt(e.target.closest('.Box-row').id, 10);
     const idx = lists[currentlyActive()].jobtasks.findIndex((x) => x.id === parseInt(taskId, 10));
     if (lists[currentlyActive()].jobtasks.length === 0 || e.target.hasAttribute('data-status-button')) {
       const completed = lists[currentlyActive()].jobtasks[idx];
@@ -135,11 +136,20 @@ if (lists[currentlyActive()].jobtasks.length !== 0) {
       saveAndRefresh(lists);
     }
     if (lists[currentlyActive()].jobtasks.length === 0 || e.target.parentElement.hasAttribute('data-delete-task')) {
-      const currentItem = parseInt(e.target.closest('.Box-row').id, 10);
-
       const tasks = lists[currentlyActive()].jobtasks.filter((x) => x.id !== currentItem);
       lists[currentlyActive()].jobtasks = tasks;
       saveAndRefresh(lists);
+    }
+    if (lists[currentlyActive()].jobtasks.length === 0 || e.target.parentElement.hasAttribute('data-edit-task')) {
+      const form = document.querySelector('#newtask');
+      form.style.display = '';
+      const ct = e.target.parentElement.closest('.Box-row').id;
+      const tidx = lists[currentlyActive()].jobtasks.findIndex((x) => x.id === parseInt(ct, 10));
+      const task = lists[currentlyActive()].jobtasks[tidx];
+      form.title.value = task.title;
+      form.desc.value = task.description;
+      form.weigth.value = task.weigth;
+      form.due.value = task.due;
     }
   });
 }
