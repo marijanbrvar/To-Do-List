@@ -9,4 +9,3 @@ npm-debug.log*
 .npm
 
 .DS_Store
-dist/
