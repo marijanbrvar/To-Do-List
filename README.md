@@ -1,13 +1,13 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# TODO list
+# TO-DO list
 
-> Another ToDo application build with Java Script. This web application was build as Single Page Application.
+> Another ToDo application build with JavaScript. This web application was made as Single Page Application.
 
 ![screenshot](./app_screenshot.png)
 
-Small difference to simple todo list is aplied in to this application as feature witch enables user to group tasks under common job.
-Gobs are manifested as navigation on right side, and on right side they show belonging tasks/
+The slight difference to the simple to-do list is applied to this application to enable the user to group tasks under a typical job.
+Gobs are manifested as navigation on the right side, and on the right side, they show belonging tasks/
 
 ## Built With
 
@@ -17,28 +17,34 @@ Gobs are manifested as navigation on right side, and on right side they show bel
 
 ## Live Demo
 
-[Live Demo Link](https://livedemo.com)
-
+[Live Demo Link](https://marijanbrvar.github.io/To-Do-List/)
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+**When you open the application from the above link, you will be able to add a task to the default job list** immediately
+**Otherwise, you can create a new list in the most left input field and add a new task to the current list.**
 
 
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
+- Chrome browser
+- Node v12.18
+- npm (usually already installed with current node version)
 
 ### Setup
+To run code locally, please follow steps belove
+1. `git clone git@github.com:marijanbrvar/To-Do-List.git && cd To-Do-List`
+2. run `npm install`
+3. then run `npm run start`
 
-### Install
+webpack will automatically open the default browser, and you can start using the ToDo web app. All data is stored locally, which means that all your job/tasks will stay present in the browser after the refresh.
 
 ### Usage
-
-### Run tests
-
-### Deployment
+1. Add a new Job list by typing the name of the job in the left input field, then press enter or click to add button
+2. To enter a new task, which belongs to the currently selected list, click on the new button, then fill n the form.
+3. After filling the form, press the "submit" button, and the application will store your task locally.
+4. to edit or delete the task, you can find buttons bottom right corner of the task card.
 
 
 ## Authors
@@ -55,18 +61,12 @@ To get a local copy up and running follow these simple example steps.
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/marijanbrvar/To-Do-List/issues).
 
 ## Show your support
 
 Give a ⭐️ if you like this project!
 
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
 ## 📝 License
 
-This project is [MIT](lic.url) licensed.
+This project is [MIT](https://github.com/marijanbrvar/To-Do-List/blob/feature-v3/LICENSE) licensed.
