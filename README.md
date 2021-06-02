@@ -1,18 +1,19 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# TODO list
 
-> One paragraph statement about the project.
+> Another ToDo application build with Java Script. This web application was build as Single Page Application.
 
 ![screenshot](./app_screenshot.png)
 
-Additional description about the project and its features.
+Small difference to simple todo list is aplied in to this application as feature witch enables user to group tasks under common job.
+Gobs are manifested as navigation on right side, and on right side they show belonging tasks/
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- JavaScript
+- HTML SCSS
+- Webpack & Babel
 
 ## Live Demo
 
