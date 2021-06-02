@@ -79,11 +79,9 @@ const editTask = (id) => {
       description: newTaskForm.desc.value,
       weigth: newTaskForm.weigth.value,
       due: newTaskForm.due.value,
-      // completed: newTaskForm.completed.value,
     };
 
     lists[currentlyActive()].jobtasks[idx] = update;
-    // console.log(update);
     saveAndRefresh(lists);
   });
 };
