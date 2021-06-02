@@ -195,7 +195,7 @@ class Screen {
     return button;
   }
 
-  buildNewJobForm() {
+  buildNewJobForm(title) {
     const target = document.querySelector('#jobs');
     const formBox = document.createElement('form');
     const formHeader = document.createElement('div');
@@ -205,7 +205,7 @@ class Screen {
     formBody.classList.add('Box-body');
     formFooter.classList.add('Box-footer', 'text-right');
     formTitle.classList.add('Box-title');
-    formTitle.innerText = 'New Job Form';
+    formTitle.innerText = title;
     formHeader.classList.add('Box-header', 'Box-header--blue');
     formBox.classList.add('Box');
     formBox.id = 'newtask';
@@ -252,8 +252,8 @@ class Screen {
     </div>
     `;
     formFooter.innerHTML = `
-    <button class="btn btn-secondary mr-1" id="cancle">Cancel</button>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-secondary mr-1" id="cancle" data-cancle-button >Cancel</button>
+    <button class="btn btn-primary" data-submit-button>Submit</button>
     `;
     formHeader.append(formTitle);
     formBox.append(formHeader, formBody, formFooter);

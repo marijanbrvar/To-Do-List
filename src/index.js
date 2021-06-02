@@ -32,7 +32,6 @@ const render = function render() {
   if (lists.length !== 0 && lists[currentlyActive()].jobtasks.length !== 0) {
     app.buildJobItemsList(lists[currentlyActive()].name, lists[currentlyActive()].jobtasks);
   }
-  app.buildNewJobForm();
 };
 render();
 
@@ -40,9 +39,54 @@ const newListForm = document.querySelector('#job-form');
 const jobList = document.querySelector('nav');
 const deleteJobListButton = document.querySelector('#delete');
 const newTaskButton = document.querySelector('#new');
-const hideNewTaskButton = document.querySelector('#cancle');
-const newTaskForm = document.querySelector('#newtask');
 const tasksList = document.querySelector('.tasks');
+
+const saveAndRefresh = (lists) => {
+  localStorage.setItem(LOCAL_STORAGE_JOB_LIST_KEY, JSON.stringify(lists));
+  window.location.reload();
+};
+
+const submitNewTask = () => {
+  const newTaskForm = document.querySelector('#newtask');
+  newTaskForm.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const title = newTaskForm.title.value;
+    const description = newTaskForm.desc.value;
+    const weigth = newTaskForm.weigth.value;
+    const due = newTaskForm.due.value;
+    if (title === '' || title === null || weigth === '' || weigth === null || due === '' || due === null) return;
+
+    lists[currentlyActive()].jobtasks.push({
+      id: lists[currentlyActive()].jobtasks.length + 1,
+      title,
+      description,
+      weigth,
+      due,
+      completed: false,
+    });
+    saveAndRefresh(lists);
+  });
+};
+
+const editTask = (id) => {
+  const newTaskForm = document.querySelector('#newtask');
+  const idx = lists[currentlyActive()].jobtasks.findIndex((x) => x.id === parseInt(id, 10));
+  newTaskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const update = {
+      id: parseInt(id, 10),
+      title: newTaskForm.title.value,
+      description: newTaskForm.desc.value,
+      weigth: newTaskForm.weigth.value,
+      due: newTaskForm.due.value,
+      // completed: newTaskForm.completed.value,
+    };
+
+    lists[currentlyActive()].jobtasks[idx] = update;
+    // console.log(update);
+    saveAndRefresh(lists);
+  });
+};
 
 function resetActivJobList() {
   if (lists.length !== 0) {
@@ -60,11 +104,6 @@ function createJobList(name) {
     jobtasks: [],
   };
 }
-
-const saveAndRefresh = (lists) => {
-  localStorage.setItem(LOCAL_STORAGE_JOB_LIST_KEY, JSON.stringify(lists));
-  window.location.reload();
-};
 
 newListForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -94,36 +133,15 @@ if (lists.length !== 0) {
     saveAndRefresh(lists);
   });
   newTaskButton.addEventListener('click', () => {
+    app.buildNewJobForm('New task');
+    submitNewTask();
     const form = document.querySelector('#newtask');
     form.style.display = 'block';
-  });
-
-  hideNewTaskButton.addEventListener('click', () => {
-    const form = document.querySelector('#newtask');
-    form.style.display = 'none';
   });
 } else {
   deleteJobListButton.setAttribute('aria-disabled', 'true');
   newTaskButton.setAttribute('aria-disabled', 'true');
 }
-
-newTaskForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const title = e.target.title.value;
-  const description = e.target.desc.value;
-  const weigth = document.querySelector('input[name = "weigth"]:checked').value;
-  const due = e.target.due.value;
-
-  lists[currentlyActive()].jobtasks.push({
-    id: lists[currentlyActive()].jobtasks.length + 1,
-    title,
-    description,
-    weigth,
-    due,
-    completed: false,
-  });
-  saveAndRefresh(lists);
-});
 
 if (lists[currentlyActive()].jobtasks.length !== 0) {
   tasksList.addEventListener('click', (e) => {
@@ -141,15 +159,17 @@ if (lists[currentlyActive()].jobtasks.length !== 0) {
       saveAndRefresh(lists);
     }
     if (lists[currentlyActive()].jobtasks.length === 0 || e.target.parentElement.hasAttribute('data-edit-task')) {
-      const form = document.querySelector('#newtask');
-      form.style.display = '';
       const ct = e.target.parentElement.closest('.Box-row').id;
       const tidx = lists[currentlyActive()].jobtasks.findIndex((x) => x.id === parseInt(ct, 10));
       const task = lists[currentlyActive()].jobtasks[tidx];
-      form.title.value = task.title;
+      app.buildNewJobForm(`Upadate ${task.title}`);
+      const form = document.querySelector('#newtask');
+      form.style.display = '';
+      form.title.setAttribute('value', task.title);
       form.desc.value = task.description;
       form.weigth.value = task.weigth;
       form.due.value = task.due;
+      editTask(ct);
     }
   });
 }
