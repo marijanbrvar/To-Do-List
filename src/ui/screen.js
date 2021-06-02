@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable class-methods-use-this */
 class Screen {
   constructor() {
     this.container = document.querySelector('.container');
@@ -14,13 +12,13 @@ class Screen {
   }
 
   addToList(selector, tagName, text) {
-    const targetElement = document.querySelector(selector);
+    this.targetElement = document.querySelector(selector);
     const element = document.createElement(tagName);
     element.innerText = text.name;
     element.classList.add('menu-item');
     element.setAttribute('aria-current', 'page');
     element.id = text.id;
-    targetElement.appendChild(element);
+    this.targetElement.appendChild(element);
     return element;
   }
 
@@ -49,7 +47,7 @@ class Screen {
   }
 
   buildHeader(title) {
-    const target = document.querySelector('BODY');
+    this.target = document.querySelector('BODY');
     const header = document.createElement('div');
     const headerItem = document.createElement('div');
     const headerLink = document.createElement('a');
@@ -60,13 +58,13 @@ class Screen {
     headerLink.innerText = title;
     header.appendChild(headerItem);
     headerItem.appendChild(headerLink);
-    target.prepend(header);
+    this.target.prepend(header);
 
     return header;
   }
 
   buildSideList(title, jobs) {
-    const target = document.querySelector('#list');
+    this.target = document.querySelector('#list');
     const nav = document.createElement('nav');
     const menuTitle = document.createElement('span');
     const jobForm = document.createElement('form');
@@ -95,7 +93,7 @@ class Screen {
       link.setAttribute('id', item.id);
       nav.appendChild(link);
     });
-    target.append(nav, jobForm);
+    this.target.append(nav, jobForm);
     return nav;
   }
 
@@ -112,8 +110,21 @@ class Screen {
     return blankSlate;
   }
 
+  colorCodingForWigth(value) {
+    this.className = '';
+    if (value === 'heigh') {
+      this.className = 'color-text-danger';
+    } else if (value === 'medium') {
+      this.className = 'color-text-warning';
+    } else {
+      this.className = 'color-text-success';
+    }
+
+    return this.className;
+  }
+
   buildJobItemsList(listName, jobsList) {
-    const target = document.querySelector('#jobs');
+    this.target = document.querySelector('#jobs');
     const jobsBox = document.createElement('div');
     const jobsHeader = document.createElement('div');
     const jobsTitle = document.createElement('h3');
@@ -145,7 +156,7 @@ class Screen {
       description.innerHTML = `
       <div><strong>Due:</strong> ${item.due}</div>
       <strong>Desc:</strong> ${item.description}
-      <div class="text-bold ${item.weigth === 'heigh' ? 'color-text-danger' : item.weigth === 'medium' ? 'color-text-warning' : 'color-text-success'}"><strong>Priority:</strong> ${item.weigth}</div> 
+      <div class="text-bold ${this.colorCodingForWigth(item.weigth)}"><strong>Priority:</strong> ${item.weigth}</div> 
       <div >
       <button class="btn-octicon ml-0" type="button" aria-label="Pencil icon" data-edit-task>
       <svg class="octicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -164,13 +175,13 @@ class Screen {
 
       jobsBox.append(boxRow);
     });
-    target.appendChild(jobsBox);
+    this.target.appendChild(jobsBox);
 
     return jobsBox;
   }
 
   buildNewJobButton() {
-    const target = document.querySelector('#jobs');
+    this.target = document.querySelector('#jobs');
     const actionBar = document.createElement('div');
     actionBar.id = 'action-bar';
     const button = document.createElement('button');
@@ -179,24 +190,24 @@ class Screen {
     button.innerText = 'New Task';
     button.id = 'new';
     actionBar.append(button);
-    target.appendChild(actionBar);
+    this.target.appendChild(actionBar);
 
     return button;
   }
 
   buildDeleteJobButton() {
-    const actionBar = document.querySelector('#action-bar');
+    this.actionBar = document.querySelector('#action-bar');
     const button = document.createElement('button');
     button.classList.add('btn', 'btn-outline', 'mr-2');
     button.innerText = 'Delete Job';
     button.id = 'delete';
-    actionBar.prepend(button);
+    this.actionBar.prepend(button);
 
     return button;
   }
 
   buildNewJobForm(title) {
-    const target = document.querySelector('#jobs');
+    this.target = document.querySelector('#jobs');
     const formBox = document.createElement('form');
     const formHeader = document.createElement('div');
     const formTitle = document.createElement('h3');
@@ -257,7 +268,7 @@ class Screen {
     `;
     formHeader.append(formTitle);
     formBox.append(formHeader, formBody, formFooter);
-    target.appendChild(formBox);
+    this.target.appendChild(formBox);
 
     return formBox;
   }
